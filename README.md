@@ -30,7 +30,7 @@ data/           本地同步服务的数据文件
 
 扩展离线时仍会将设置和记录保存在 Chrome 本地存储。启动本地服务后，扩展会自动在本机同步数据。
 
-需要 CMake 和 C++17 编译器：
+需要 CMake 和 C++17 编译器。Windows 下可以双击项目根目录的 `build.bat` 一键配置和编译；也可以手动执行：
 
 ```powershell
 cmake -S backend -B backend/build
