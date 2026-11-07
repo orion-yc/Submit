@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Submit",
+  "version": "2.0.0",
+  "description": "智能筛选职位并自动投递的 BOSS 直聘助手",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.zhipin.com/*",
+    "http://127.0.0.1:8888/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "branding/submit-16.png",
+      "48": "branding/submit-48.png",
+      "128": "branding/submit-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.zhipin.com/web/geek/job*",
+        "https://www.zhipin.com/web/geek/jobs*",
+        "https://www.zhipin.com/web/geek/chat*"
+      ],
+      "js": ["app/content/bootstrap.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "app/background/index.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [{
+    "resources": ["app/content/*.js", "app/core/*.js"],
+    "matches": ["https://www.zhipin.com/*"]
+  }],
+  "icons": {
+    "16": "branding/submit-16.png",
+    "48": "branding/submit-48.png",
+    "128": "branding/submit-128.png"
+  }
+}

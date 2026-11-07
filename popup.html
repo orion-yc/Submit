@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101522">
+  <title>Submit</title>
+  <link rel="stylesheet" href="app/popup/style.css">
+</head>
+<body>
+  <main class="window">
+    <header class="masthead">
+      <img src="branding/submit-128.png" alt="Submit" class="brand-avatar">
+      <div class="brand-copy"><p class="overline">JOB SEARCH TOOLKIT</p><h1>Submit</h1><p class="subtitle">把目标职位留给我筛选</p></div>
+      <div class="service"><i id="serviceLamp"></i><span id="serviceState">本机存储</span></div>
+    </header>
+    <section class="metrics" aria-label="投递统计">
+      <article><span class="metric-label">累计确认</span><strong id="totalApplied">0</strong></article>
+      <article><span class="metric-label">今天</span><strong id="todayApplied">0</strong></article>
+      <article><span class="metric-label">待同步</span><strong id="pendingSync">0</strong></article>
+    </section>
+    <nav class="tabs" aria-label="工具页面">
+      <button type="button" class="tab active" data-tab="settings">筛选设置</button>
+      <button type="button" class="tab" data-tab="history">投递记录</button>
+    </nav>
+    <section class="page active" id="settings-page">
+      <form id="settingsForm">
+        <section class="group"><div class="group-heading"><span class="index">01</span><div><h2>职位匹配</h2><p>设置希望寻找的岗位范围</p></div></div>
+          <label for="keywords">目标关键词</label><input id="keywords" type="text" placeholder="C++, 后端, Linux">
+          <div class="pair"><div><label for="minKeywordMatch">至少命中</label><input id="minKeywordMatch" type="number" min="0" max="100"><small>个关键词</small></div><div><label for="maxJobs">本轮上限</label><input id="maxJobs" type="number" min="1" max="500"><small>个职位</small></div></div>
+          <label for="excludeKeywords">排除词</label><input id="excludeKeywords" type="text" placeholder="外包, 派遣, 实习">
+          <label for="minExcludeMatch">命中几个排除词时跳过</label><input id="minExcludeMatch" type="number" min="1" max="100">
+        </section>
+        <section class="group"><div class="group-heading"><span class="index">02</span><div><h2>招聘者偏好</h2><p>仅过滤能明确识别的在线状态</p></div></div>
+          <label class="switch-row"><span><b>限制活跃状态</b><small>状态未显示时仍会保留该职位</small></span><input id="hrOnline" type="checkbox"><i></i></label>
+          <div class="activity-options">
+            <label><input type="checkbox" name="hrActivityOption" value="online">在线</label><label><input type="checkbox" name="hrActivityOption" value="just_now">刚刚活跃</label>
+            <label><input type="checkbox" name="hrActivityOption" value="today">今日活跃</label><label><input type="checkbox" name="hrActivityOption" value="three_days">3 日内</label>
+            <label><input type="checkbox" name="hrActivityOption" value="this_week">本周活跃</label><label><input type="checkbox" name="hrActivityOption" value="this_month">本月活跃</label>
+          </div>
+        </section>
+        <section class="group"><div class="group-heading"><span class="index">03</span><div><h2>沟通方式</h2><p>每次确认沟通后才会写入记录</p></div></div>
+          <label for="delay">每次沟通间隔</label><div class="unit-input"><input id="delay" type="number" min="1000" max="600000"><span>毫秒</span></div>
+          <label class="check-row"><input id="autoGreeting" type="checkbox"><span>自动发送招呼语</span></label>
+          <label for="greetingTemplate">招呼语模板</label><textarea id="greetingTemplate" rows="3" placeholder="您好，我对{company}的{position}很感兴趣…"></textarea>
+          <small class="form-hint">可用变量：{position}、{company}、{experience}</small>
+        </section>
+        <div class="actions"><button class="button quiet" id="saveConfig" type="button">保存设置</button><button class="button main" id="startApply" type="button">在当前页面开始</button></div>
+      </form>
+    </section>
+    <section class="page" id="history-page"><div class="history-heading"><div><h2>投递记录</h2><p>仅显示已经确认沟通的职位</p></div><div class="history-actions"><button class="icon-button" id="exportRecords" type="button" title="导出 CSV">导出</button><button class="icon-button danger" id="clearRecords" type="button" title="清除记录">清除</button></div></div><div id="recordsList" class="records"><div class="empty">这里还没有记录</div></div></section>
+    <footer><span>数据默认保存在此浏览器</span><span class="build">SUBMIT · 2.0</span></footer>
+    <div id="notice" role="status" aria-live="polite"></div>
+  </main>
+  <script type="module" src="app/popup/index.js"></script>
+</body>
+</html>

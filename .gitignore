@@ -1,0 +1,27 @@
+.DS_Store
+build/
+backend/build/
+data/
+node_modules/
+.vscode/
+.idea/
+*.log
+*.zip
+
+# Native compiler outputs and IDE intermediates
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.sln
+*.slnx
+*.vcxproj*
+*.tlog/
+*.obj
+*.o
+*.ilk
+*.pdb
+*.idb
+*.lib
+*.dll
+*.exe
